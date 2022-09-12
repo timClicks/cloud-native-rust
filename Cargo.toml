@@ -1,0 +1,12 @@
+[workspace]
+members = [
+	"01-open-csv",
+	"02-records",
+	"03-structure",
+	"04-sorting",
+	"05-limit",
+	"06-static-build",
+	"07-app",
+	"08-embed-assets",
+	"09-api",
+]

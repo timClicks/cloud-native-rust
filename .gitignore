@@ -1,0 +1,6 @@
+## mdbook output
+book
+
+## Rust compilation artifacts
+code/**/target/
+
