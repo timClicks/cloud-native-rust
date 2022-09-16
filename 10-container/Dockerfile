@@ -14,15 +14,19 @@ FROM ${BASE_IMAGE} AS builder
 ADD --chown=rust:rust . ./
 
 # Build our application.
-RUN cargo build --release
+RUN cd 10-container \
+    && cargo build --release
 RUN ls -R /home/rust/src/target/
 
 # Now, we need to build our _real_ Docker container, copying in `using-diesel`.
 FROM alpine:latest
+WORKDIR /app
+
 RUN apk --no-cache add ca-certificates
 
-
 COPY --from=builder \
-    /home/rust/src/target/x86_64-unknown-linux-musl/release/using-diesel \
-    /usr/local/bin/
-CMD /usr/local/bin/using-diesel
+    /home/rust/src/target/x86_64-unknown-linux-musl/release/container \
+    /app
+COPY --from=builder /home/rust/src/10-container/Rocket.toml /app
+
+CMD /app/container
