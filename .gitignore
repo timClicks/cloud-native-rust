@@ -2,5 +2,4 @@
 book
 
 ## Rust compilation artifacts
-code/**/target/
-
+**/target/
